@@ -64,7 +64,8 @@ class Application:
     def geminiOutput(self,e):
         prompt = self.prompt.value
         self.allResponse = self.gemini(prompt)
-        responseLabel = ft.Text(value="", selectable=True, expand=True)
+        responseLabel = ft.Markdown(value="", selectable=True, expand=True,)
+        
         self.outputs.controls.append(responseLabel)
         self.outputs.controls.append(ft.Divider(thickness=5))
         self.page.update()
