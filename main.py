@@ -2,8 +2,9 @@ import flet as ft
 import google.generativeai as genai
 import os,dotenv
 
-dotenv.load_dotenv()
-apiKey = dotenv.dotenv_values(".env","GEMINI_API")
+# dotenv.load_dotenv()
+# apiKey = dotenv.dotenv_values(".env","GEMINI_API")
+
 
 class Application:
     def __init__(self):
@@ -24,8 +25,6 @@ class Application:
                         italic=True,
             ),
             bgcolor=ft.colors.SURFACE_VARIANT,
-
-
         )
         self.prompt = ft.TextField(
             expand=True,
@@ -39,7 +38,6 @@ class Application:
             min_lines=3,
         )
         self.sendPrompt = ft.IconButton(icon=ft.icons.SEND,on_click=self.geminiOutput)
-        # self.microphoneButton = ft.IconButton(icon=ft.icons.MIC)
         self.clearAll = ft.IconButton(icon=ft.icons.DELETE,on_click=self.clearGemini)
         self.outputs = ft.ListView(
             expand=True,
@@ -61,10 +59,11 @@ class Application:
         
         self.page.update()
 
+
     def geminiOutput(self,e):
         prompt = self.prompt.value
         self.allResponse = self.gemini(prompt)
-        responseLabel = ft.Markdown(value="", selectable=True, expand=True,)
+        responseLabel = ft.Markdown(value="", selectable=True, expand=True,extension_set="gitHubWeb")
         
         self.outputs.controls.append(responseLabel)
         self.outputs.controls.append(ft.Divider(thickness=5))
@@ -89,7 +88,9 @@ class Application:
     def gemini(self,prompt):
         self.disableEle()
         try:
-            genai.configure(api_key=apiKey["GEMINI_API"])
+            # genai.configure(api_key=apiKey["GEMINI_API"])
+            apiKey = "AIzaSyCqgYRBLW5BR8QePnVERa3zrrmHODLdIF4"
+            genai.configure(api_key=apiKey)
             model = genai.GenerativeModel(model_name="gemini-1.5-flash")
             prompt = f"{self.allResponse} \n {prompt}"
             response = model.generate_content([prompt])
@@ -107,8 +108,9 @@ class Application:
     def main(self, page: ft.Page):
         self.page = page
         self.page.title = "Mr. Chat"
-        self.page.theme_mode = "light"
-        self.page.theme = ft.Theme(color_scheme_seed="#7F00FF")
+        self.page.theme_mode = ft.ThemeMode.DARK
+        self.page.theme = ft.Theme(color_scheme_seed="#7F00FF",)
+        self.page.theme.page_transitions.android = ft.PageTransitionTheme.OPEN_UPWARDS
         self.page.padding = 10
 
         # Fonts . . .
