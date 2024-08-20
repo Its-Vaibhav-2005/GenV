@@ -2,8 +2,8 @@ import flet as ft
 import google.generativeai as genai
 import os,dotenv
 
-# dotenv.load_dotenv()
-# apiKey = dotenv.dotenv_values(".env","GEMINI_API")
+dotenv.load_dotenv()
+apiKey = dotenv.dotenv_values(".env","GEMINI_API")
 
 
 class Application:
@@ -88,8 +88,7 @@ class Application:
     def gemini(self,prompt):
         self.disableEle()
         try:
-            # genai.configure(api_key=apiKey["GEMINI_API"])
-            apiKey = "AIzaSyCqgYRBLW5BR8QePnVERa3zrrmHODLdIF4"
+            genai.configure(api_key=apiKey["GEMINI_API"])
             genai.configure(api_key=apiKey)
             model = genai.GenerativeModel(model_name="gemini-1.5-flash")
             prompt = f"{self.allResponse} \n {prompt}"
