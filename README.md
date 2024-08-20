@@ -24,6 +24,9 @@ To get started with MrChat, follow these steps:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/mrchat.git
+git clone https://github.com/Its-Vaibhav-2005/Mr-Chat.git
 cd mrchat
 ```
+
+## Contact
+- **Contact**: [pandey.vaibhav311005@gmail.com](pandey.vaibhav311005@gmail.com)
