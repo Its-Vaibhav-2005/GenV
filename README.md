@@ -17,9 +17,9 @@ To get started with MrChat, follow these steps:
 
 ### Prerequisites
 
-- Python 3.8 or higher
-- [Flet](https://flet.dev/) installed
-- [Google Generative AI Documentation](https://link-to-google-generative-ai-docs)
+- [Python 3.8 or higher](https://www.python.org/)
+- [Flet](https://flet.dev/) 
+- [Google Generative AI Documentation](https://deepmind.google/technologies/gemini/)
 
 ### Clone the Repository
 
