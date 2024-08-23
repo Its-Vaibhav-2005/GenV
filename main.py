@@ -6,53 +6,6 @@ dotenv.load_dotenv()
 apiKey = dotenv.dotenv_values(".env","GEMINI_API")
 
 
-class outputCard(ft.Container):
-    def __init__(self,prompt,response):
-        super().__init__()
-        print("Added . . .")
-        self.response = response
-        self.expand = True
-        self.query = ft.Row(
-            expand=True,
-            controls=[
-                ft.CircleAvatar(
-                    content=ft.Icon(ft.icons.PERSON)
-                ),
-                ft.Text(
-                    expand=True,
-                    value=prompt,
-                    text_align=ft.TextAlign.RIGHT,
-                    size=24
-                )
-            ],
-        )
-        self.responseLabel = ft.Markdown(value=response, selectable=True, expand=True,extension_set="gitHubWeb",code_theme="atom-one-dark")
-        self.content = ft.Column(
-            expand=True,
-            controls=[
-                self.query,
-                ft.Divider(thickness=1),
-                self.responseLabel,
-                ft.Divider(thickness=5)
-            ]   
-        )
-        # self.controls=[
-        #     self.query,
-        #     ft.Divider(thickness=1),
-        #     self.responseLabel,
-        #     ft.Divider(thickness=5)
-        # ]
-        # self.update()
-        # self.write()
-    # def write(self):
-    #     for c in self.response:
-    #         self.responseLabel.value += c
-    #         self.update()
-
-
-
-
-
 class Application:
     def __init__(self):
         # Basics . . .
