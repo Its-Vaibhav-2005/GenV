@@ -6,12 +6,61 @@ dotenv.load_dotenv()
 apiKey = dotenv.dotenv_values(".env","GEMINI_API")
 
 
+class outputCard(ft.Container):
+    def __init__(self,prompt,response):
+        super().__init__()
+        print("Added . . .")
+        self.response = response
+        self.expand = True
+        self.query = ft.Row(
+            expand=True,
+            controls=[
+                ft.CircleAvatar(
+                    content=ft.Icon(ft.icons.PERSON)
+                ),
+                ft.Text(
+                    expand=True,
+                    value=prompt,
+                    text_align=ft.TextAlign.RIGHT,
+                    size=24
+                )
+            ],
+        )
+        self.responseLabel = ft.Markdown(value=response, selectable=True, expand=True,extension_set="gitHubWeb",code_theme="atom-one-dark")
+        self.content = ft.Column(
+            expand=True,
+            controls=[
+                self.query,
+                ft.Divider(thickness=1),
+                self.responseLabel,
+                ft.Divider(thickness=5)
+            ]   
+        )
+        # self.controls=[
+        #     self.query,
+        #     ft.Divider(thickness=1),
+        #     self.responseLabel,
+        #     ft.Divider(thickness=5)
+        # ]
+        # self.update()
+        # self.write()
+    # def write(self):
+    #     for c in self.response:
+    #         self.responseLabel.value += c
+    #         self.update()
+
+
+
+
+
 class Application:
     def __init__(self):
+        # Basics . . .
         self.page = None
         self.allResponse = ""
         self.prompts = []
-        self.themeMode = ft.IconButton(icon=ft.icons.NIGHTS_STAY, on_click=self.themeModeChanger)
+        self.themeMode = ft.IconButton(icon=ft.icons.SUNNY, on_click=self.themeModeChanger)
+        # Main Appbar
         self.AppBar = ft.AppBar(
             leading_width=50,
             center_title=False,
@@ -26,6 +75,7 @@ class Application:
             ),
             bgcolor=ft.colors.SURFACE_VARIANT,
         )
+        # prompt input feild
         self.prompt = ft.TextField(
             expand=True,
             autofocus=True,
@@ -37,13 +87,16 @@ class Application:
             on_submit=self.geminiOutput,
             min_lines=3,
         )
+        # buttons
         self.sendPrompt = ft.IconButton(icon=ft.icons.SEND,on_click=self.geminiOutput)
         self.clearAll = ft.IconButton(icon=ft.icons.DELETE,on_click=self.clearGemini)
+        # inside main Pannel view
         self.outputs = ft.ListView(
             expand=True,
             auto_scroll=True,
-            spacing=15,
+            spacing=1,
         )
+        # main output pannel
         self.outputPannel = ft.Container(
             border=ft.border.all(1, ft.colors.OUTLINE),
             border_radius=10,
@@ -52,10 +105,23 @@ class Application:
             content=self.outputs,
             margin=0
         )
+        # Output Elements inner widgets . . .
+        self.responseLabel = ft.Markdown(value="", selectable=True, expand=True,extension_set="gitHubWeb",code_theme="atom-one-dark")
+
+
 
     def themeModeChanger(self,e):
-        self.page.theme_mode = (ft.ThemeMode.DARK if self.page.theme_mode == ft.ThemeMode.LIGHT else ft.ThemeMode.LIGHT)
-        self.themeMode.icon = (ft.icons.NIGHTS_STAY if self.page.theme_mode == ft.ThemeMode.LIGHT else ft.icons.SUNNY)
+        self.page.theme_mode = (
+            ft.ThemeMode.DARK
+            if self.page.theme_mode == ft.ThemeMode.LIGHT
+            else ft.ThemeMode.LIGHT
+        )
+        self.themeMode.icon = (
+            ft.icons.NIGHTS_STAY if self.page.theme_mode == ft.ThemeMode.LIGHT else ft.icons.SUNNY
+        )
+        self.responseLabel.code_theme = (
+            "atom-one-light" if self.page.theme_mode == ft.ThemeMode.LIGHT else "atom-one-dark"
+        )
         
         self.page.update()
 
@@ -63,14 +129,13 @@ class Application:
     def geminiOutput(self,e):
         prompt = self.prompt.value
         self.allResponse = self.gemini(prompt)
-        responseLabel = ft.Markdown(value="", selectable=True, expand=True,extension_set="gitHubWeb")
-        
-        self.outputs.controls.append(responseLabel)
+        self.outputs.controls.append(self.responseLabel)
         self.outputs.controls.append(ft.Divider(thickness=5))
-        self.page.update()
         for c in self.allResponse:
-            responseLabel.value += c
+            self.responseLabel.value += c
             self.page.update()
+        self.page.update()
+
         self.prompt.value = ""
         self.page.update()
     def disableEle(self):
@@ -89,7 +154,7 @@ class Application:
         self.disableEle()
         try:
             genai.configure(api_key=apiKey["GEMINI_API"])
-            genai.configure(api_key=apiKey)
+            # genai.configure(api_key=apiKey)
             model = genai.GenerativeModel(model_name="gemini-1.5-flash")
             prompt = f"{self.allResponse} \n {prompt}"
             response = model.generate_content([prompt])
@@ -106,15 +171,11 @@ class Application:
 
     def main(self, page: ft.Page):
         self.page = page
-        self.page.title = "Mr. Chat"
+        self.page.title = "GenV"
         self.page.theme_mode = ft.ThemeMode.DARK
         self.page.theme = ft.Theme(color_scheme_seed="#7F00FF",)
         self.page.theme.page_transitions.android = ft.PageTransitionTheme.OPEN_UPWARDS
         self.page.padding = 10
-
-        # Fonts . . .
-        dancingFont = """<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap">"""
-
 
         # App Bar
         self.page.appbar = self.AppBar

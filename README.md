@@ -1,6 +1,6 @@
-# MrChat
+# GenV
 
-MrChat is a cutting-edge chat application that leverages Google's Generative AI to provide intelligent and engaging conversations. Designed for cross-platform compatibility, MrChat offers a seamless experience across Windows, Web, and Android platforms.
+GenV is a cutting-edge chat application that leverages Google's Generative AI to provide intelligent and engaging conversations. Designed for cross-platform compatibility, GenV offers a seamless experience across Windows, Web, and Android platforms.
 
 ## Features
 
@@ -13,7 +13,7 @@ MrChat is a cutting-edge chat application that leverages Google's Generative AI 
 
 ## Installation
 
-To get started with MrChat, follow these steps:
+To get started with GenV, follow these steps:
 
 ### Prerequisites
 
