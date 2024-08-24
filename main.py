@@ -3,8 +3,8 @@ import google.generativeai as genai
 # import os
 
 
-# apiKey = os.getenv("GEMINI_API")
-apiKey = "AIzaSyCqgYRBLW5BR8QePnVERa3zrrmHODLdIF4"
+apiKey = os.getenv("GEMINI_API")
+
 
 
 class Application:
