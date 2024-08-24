@@ -24,7 +24,7 @@ To get started with GenV, follow these steps:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/Its-Vaibhav-2005/Mr-Chat.git
+git clone https://github.com/Its-Vaibhav-2005/GenV.git
 cd mrchat
 ```
 
