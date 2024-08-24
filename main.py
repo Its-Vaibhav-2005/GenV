@@ -1,6 +1,6 @@
 import flet as ft
 import google.generativeai as genai
-# import os
+import os
 
 
 apiKey = os.getenv("GEMINI_API")
