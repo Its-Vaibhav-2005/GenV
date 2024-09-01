@@ -18,6 +18,7 @@ To get started with GenV, follow these steps:
 ### Prerequisites
 
 - [Python 3.8 or higher](https://www.python.org/)
+- [Flutter](https://docs.flutter.dev/)
 - [Flet](https://flet.dev/) 
 - [Google Generative AI Documentation](https://deepmind.google/technologies/gemini/)
 
