@@ -3,8 +3,8 @@ import google.generativeai as genai
 import os
 
 
-apiKey = os.getenv("GEMINI_API")
-
+# apiKey = os.getenv("GEMINI_API")
+apiKey = "AIzaSyCqgYRBLW5BR8QePnVERa3zrrmHODLdIF4"
 
 
 class Application:
@@ -181,6 +181,6 @@ class Application:
         self.page.update()
 
 
-if __name__ == "__main__":
-    app = Application()
-    ft.app(target=app.main,assets_dir="./assets")
+
+app = Application()
+ft.app(target=app.main,assets_dir="./assets")
