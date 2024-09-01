@@ -42,7 +42,7 @@ class Application:
             border_radius=20,
             on_submit=self.geminiOutput,
             min_lines=3,
-            adaptive=True
+            adaptive=True,
         )
         # buttons
         self.sendPrompt = ft.IconButton(icon=ft.icons.SEND,on_click=self.geminiOutput)
@@ -64,8 +64,7 @@ class Application:
             margin=0,
             adaptive=True
         )
-        # Output Elements inner widgets . . .
-        self.responseLabel = ft.Markdown(value="", selectable=True, expand=True,extension_set="gitHubWeb",code_theme="atom-one-dark")
+        
 
 
 
@@ -102,7 +101,7 @@ class Application:
             spacing=5,
             controls=[
                 ft.CircleAvatar(
-                    content=ft.Icon(ft.icons.MAN)
+                    content=ft.Icon(ft.icons.TAG_FACES)
                 ),
                 ft.Text(value=prompt,text_align=ft.TextAlign.RIGHT,size=24,expand=True)
             ],
@@ -153,7 +152,7 @@ class Application:
         self.page.title = "GenV"
         self.page.adaptive = True
         self.page.theme_mode = ft.ThemeMode.DARK
-        self.page.theme = ft.Theme(color_scheme_seed="#7F00FF",)
+        self.page.theme = ft.Theme(color_scheme_seed="#100e09",)
         self.page.theme.page_transitions.android = ft.PageTransitionTheme.OPEN_UPWARDS
         self.page.padding = 10
 
@@ -184,4 +183,4 @@ class Application:
 
 if __name__ == "__main__":
     app = Application()
-    ft.app(target=app.main,assets_dir="./assets",view=ft.WEB_BROWSER)
+    ft.app(target=app.main,assets_dir="./assets")

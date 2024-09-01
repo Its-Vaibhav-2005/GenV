@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="app">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/windows/data/flutter_assets/app/app.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
